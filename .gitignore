@@ -1,0 +1,12 @@
+﻿################################################################################
+# Ce fichier .gitignore a été automatiquement créé par Microsoft(R) Visual Studio.
+################################################################################
+
+/__pycache__
+/maintenance/REPAIR
+/.vs/SMA SunnyBoy/v15
+/repair.py
+/SMA SunnyBoy.sln
+/SMA SunnyBoy.pyproj
+/repair.py.old
+/publish.py
