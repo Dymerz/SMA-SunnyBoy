@@ -2,6 +2,9 @@
 
 This is a simple data retrieving from **SMA SunnyBoy**
 
+## Comptability
+Tested on SunnyBoy 5.0 (1.3.17.R)
+
 ## His history !!
 After installed some solar panels, my father wanted to know how many their produce, then he ask me to retrieve these data, firstly I searched after an official API from SMA but nohting else hardware documentation, then I searched after some Gits made by user, but unfortunately, nothing worked for my beautifull SMA..
 Well.. I love programming and digging in code source of other developper is always interesting,
