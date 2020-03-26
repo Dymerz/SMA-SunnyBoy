@@ -77,6 +77,7 @@ class WebConnect:
 	__password = ''
 	__url = ''
 	__port = 80
+	__serial = ''
 
 	def __init__(self, ip, user, password, port=80, useSSL = False):
 		self.ip = ip
@@ -171,7 +172,8 @@ class WebConnect:
 		if 'err' in json_data:
 			return None
 		else:
-			val= json_data['result']['0156-76BD14A8'][key['tag']]['1'][0]['val']
+			self.__serial = list(json_data['result'].keys())[0]
+			val = json_data['result'][self.__serial][key['tag']]['1'][0]['val']
 			if val != None:
 				return val
 			else:
@@ -216,7 +218,8 @@ class WebConnect:
 		if not 'result' in json_data: 
 			return {}
 		else:
-			return json_data['result']['0156-76BD14A8']
+			self.__serial = list(json_data['result'].keys())[0]
+			return json_data['result'][self.__serial]
 
 	# ##################
 	# Private functions
