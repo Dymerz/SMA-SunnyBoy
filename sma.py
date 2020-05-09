@@ -33,6 +33,10 @@ class KEY:
 
 	ethernet_status = {'tag': '6180_084A9600', 'unit': 'status'}
 	ethernet_counter_status = {'tag': '6180_084AAA00', 'unit': 'status'}
+	ethernet_ip = {'tag': '6800_10AA6100'}
+	ethernet_netmask = {'tag': '6800_10AA6200'}
+	ethernet_gateway = {'tag': '6800_10AA6300'}
+	ethernet_dns = {'tag': '6800_10AA6400'}
 
 	wlan_strength = {'tag': '6100_004AB600'}
 	wlan_ip = {'tag': '6180_104AB700'}
@@ -153,16 +157,16 @@ class WebConnect:
 
 		try: 
 			r = requests.post(self.__url + '/dyn/logout.json?sid=' + self.ssid, headers=headers, json=params)
-			self.lsid = None
-			self.ssid = None
-			self.cookie = None
 		except Exception:
-			return None
+			return False
 
 		json_data = json.loads(r.text)
 		if 'err' in json_data:
 			return False
 		else:
+			self.lsid = None
+			self.ssid = None
+			self.cookie = None
 			return not json_data['result']['isLogin']
 
 	def check_connection(self):
@@ -232,7 +236,10 @@ class WebConnect:
 		headers = self.__get_header(params)
 		 
 		try:
-			r = requests.post(self.__url+'/dyn/getAllParamValues.json?sid='+self.ssid, headers=headers, json=params)			
+			r = requests.post(self.__url + '/dyn/getAllParamValues.json?sid=' + self.ssid, headers=headers, json=params)
+			json_data = json.loads(r.text)
+			self.__serial = self.__serial = list(json_data['result'].keys())[0]
+			return json_data['result'][self.__serial]	
 		except Exception:
 			return None
 
