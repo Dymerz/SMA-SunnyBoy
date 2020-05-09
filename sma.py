@@ -195,7 +195,7 @@ class WebConnect:
 		return True
 
 	def get_value(self, key:KEY):
-		"""[summary]
+		"""Get a specific value
 
 		:param key: The key to retrieve values from (see in the KEY class)
 		:type key: dict
@@ -244,7 +244,7 @@ class WebConnect:
 			return None
 
 	def get_logger(self, start: int, end: int):
-		"""[summary]
+		"""Get solar production in the timestamp range
 
 		:param start: The start timestamp
 		:type start: int
