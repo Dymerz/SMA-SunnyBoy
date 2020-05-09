@@ -11,7 +11,7 @@ Tested on SunnyBoy 5.0 (1.3.17.R)
 import sma
 client = sma.WebConnect("192.168.0.10", sma.RIGHT.USER, "password")
 client.auth()
-pow_current = client.getValue(sma.KEYS.pow_current)
+pow_current = client.get_value(sma.KEYS.pow_current)
 client.logout()
 ```
 
@@ -31,11 +31,11 @@ Initialize the module using **auth()**
 client.auth()
 ```
 
-You can check if you are still authenticated using **checkConnected()**
+You can check if you are still authenticated using **check_connection()**
 
 (return: **Boolean**)
 ```py
-client.checkConnected()
+client.check_connection()
 ```
 
 ## Logout
@@ -47,14 +47,14 @@ client.logout()
 ```
 
 ## Get Value
-You can retrieve an instant value using **GetValue()**
+You can retrieve an instant value using **get_value()**
 
 Pass in argument the wanted key from **sma.KEY.key_name**
 
 (return: **String**)
 
 ```py
-value = client.getValue(sma.KEYS.power_total)
+value = client.get_value(sma.KEYS.power_total)
 print(value)
 ```
 
@@ -96,11 +96,11 @@ device_error = {'tag': '6100_00412000', 'unit': 'W'}
 ```
 
 ## Get all instant values
-Using **getAllKeys()** you can obtains all SMA value in JSON format
+Using **get_all_keys()** you can obtains all SMA value in JSON format
 
 (return: **JSON**)
 
 ```py
-data = client.getAllKeys()
+data = client.get_all_keys()
 print(data)
 ```
