@@ -1,13 +1,9 @@
 import sma
 
-# address of SMA
-address = "0.0.0.0"
 
-# your user password
-password = "strongPassword"
-
-# the right level
-right = sma.RIGHT.USER
+address = "0.0.0.0" 		# address of SMA
+password = "strongPassword" # your user password
+right = sma.RIGHT.USER		# the connexion level
 
 # create object
 client = sma.WebConnect(address, right, password)
@@ -16,22 +12,22 @@ client = sma.WebConnect(address, right, password)
 client.auth()
 
 # check connection state
-if not client.checkConnected():
+if not client.check_connection():
 	print("[!] Cannot authenticate to the server, check your credentials")
 else:
 	print("[+] Connected to SMA")
 	print("[*] getting some data")
 
 	# get the production counter from solar panel
-	power_total = client.getValue(sma.KEYS.power_total)
+	power_total = client.get_value(sma.KEYS.power_total)
 	print("[*] Production Counter: %d%s" % (power_total, sma.KEYS.power_total["unit"]))
 
 	# get the current production from solar panel
-	pow_current = client.getValue(sma.KEYS.pow_current)
+	pow_current = client.get_value(sma.KEYS.pow_current)
 	print("[*] Current production: %d%s" % (pow_current, sma.KEYS.pow_current["unit"]))
 
 	# Don't forget to disconnect from web server
 	print("[+] Disconnecting..")
 	if client.logout() == False:
 		print("[!] Error in logout!")
-	print("[.] Done.")
+	print("[+] Done.")
