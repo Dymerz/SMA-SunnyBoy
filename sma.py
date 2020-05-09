@@ -81,7 +81,6 @@ class WebConnect:
 	:rtype: WebConnect
 	"""
 	ip = None
-	use_ssl = False
 	cookie = None
 	lsid = None
 	ssid = None
@@ -91,6 +90,7 @@ class WebConnect:
 	__url = None
 	__port = 80
 	__serial = None
+	__use_ssl = False
 
 	def __init__(self, ip: str, user: RIGHT, password: str, port=80, use_ssl=False):
 		"""Initialize a new WebConnect object
@@ -109,11 +109,11 @@ class WebConnect:
 		self.ip = ip
 		self.__user = user
 		self.__password = password
-		self.use_ssl = use_ssl
-		self.port = port
+		self.__port = port
+		self.__use_ssl = use_ssl
 		
 		self.__url = 'http://'+self.ip
-		if self.use_ssl:
+		if self.__use_ssl:
 			self.__url = 'https://'+self.ip
 
 		self.__url+= ':'+str(port)
