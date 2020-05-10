@@ -1,12 +1,12 @@
-import sma
+from sma_sunnyboy import *
 
 
 address = "0.0.0.0" 		# address of SMA
 password = "strongPassword" # your user password
-right = sma.RIGHT.USER		# the connexion level
+right = Right.USER		# the connexion level
 
 # create object
-client = sma.WebConnect(address, right, password)
+client = WebConnect(address, right, password)
 
 # authenticate with credentials
 client.auth()
@@ -19,12 +19,12 @@ else:
 	print("[*] getting some data")
 
 	# get the production counter from solar panel
-	power_total = client.get_value(sma.KEYS.power_total)
-	print("[*] Production Counter: %d%s" % (power_total, sma.KEYS.power_total["unit"]))
+	power_total = client.get_value(Key.power_total)
+	print("[*] Production Counter: %d%s" % (power_total, Key.power_total["unit"]))
 
 	# get the current production from solar panel
-	pow_current = client.get_value(sma.KEYS.pow_current)
-	print("[*] Current production: %d%s" % (pow_current, sma.KEYS.pow_current["unit"]))
+	pow_current = client.get_value(Key.pow_current)
+	print("[*] Current production: %d%s" % (pow_current, Key.pow_current["unit"]))
 
 	# Don't forget to disconnect from web server
 	print("[+] Disconnecting..")
