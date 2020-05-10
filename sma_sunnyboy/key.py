@@ -12,11 +12,11 @@ class Key:
 	server_netmask = {'tag': '6180_104A9B00'}
 	server_gatewy = {'tag': '6180_104A9C00'}
 
-	powwer_ab = {'tag': '6380_40251E00'}
-	powwer_b = {'tag': '6380_40451F00'}
+	power_ab = {'tag': '6380_40251E00'}
+	power_b = {'tag': '6380_40451F00'}
 	voltage_ab = {'tag': '6380_40451F00'}
 	tide_ab = {'tag': '6380_40452100'}
-	powwer_amp_ = {'tag': '6100_40465300', 'unit': 'A'}
+	power_amp_ = {'tag': '6100_40465300', 'unit': 'A'}
 
 	productivity_total = {'tag': '6400_00260100'}
 	service_time = {'tag': '6400_00462E00', 'unit': 's'}
