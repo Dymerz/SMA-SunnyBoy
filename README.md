@@ -8,10 +8,10 @@ Tested on SunnyBoy 5.0 (1.3.17.R)
 ## Simple usage
 
 ```py
-import sma
-client = sma.WebConnect("192.168.0.10", sma.RIGHT.USER, "password")
+from sma_sunnyboy import *
+client = WebConnect("192.168.0.10", Right.USER, "password")
 client.auth()
-pow_current = client.get_value(sma.KEYS.pow_current)
+pow_current = client.get_value(Key.pow_current)
 client.logout()
 ```
 
@@ -19,8 +19,8 @@ client.logout()
 Start by import and instantiate the module using **WebConnect**
 
 ```py
-import sma
-client = sma.WebConnect("192.168.0.10", sma.RIGHT.USER, "password")
+from sma_sunnyboy import *
+client = WebConnect("192.168.0.10", Right.USER, "password")
 ```
 
 ## Authenticate
@@ -49,12 +49,12 @@ client.logout()
 ## Get Value
 You can retrieve an instant value using **get_value()**
 
-Pass in argument the wanted key from **sma.KEY.key_name**
+Pass in argument the wanted key from **Key.key_name**
 
 (return: **String**)
 
 ```py
-value = client.get_value(sma.KEYS.power_total)
+value = client.get_value(Key.power_total)
 print(value)
 ```
 
