@@ -77,7 +77,7 @@ You can use preset keys from the list bellow:
 
 | Tag                     | ID            | Unit   |
 |-------------------------|---------------|--------|
-| pow_current             | 6100_40263F00 | W      |
+| power_current           | 6100_40263F00 | W      |
 | power_total             | 6400_00260100 | W      |
 | server_ip               | 6180_104A9A00 |        |
 | server_dns              | 6180_104A9D00 |        |
@@ -87,7 +87,7 @@ You can use preset keys from the list bellow:
 | power_b                 | 6380_40451F00 |        |
 | voltage_ab              | 6380_40451F00 |        |
 | tide_ab                 | 6380_40452100 |        |
-| powwer_amp_             | 6100_40465300 | A      |
+| power_amp_              | 6100_40465300 | A      |
 | productivity_total      | 6400_00260100 |        |
 | service_time            | 6400_00462E00 | s      |
 | injection_time          | 6400_00462F00 | s      |

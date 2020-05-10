@@ -4,7 +4,7 @@ class Key:
 	#	307  -> online
 
 	
-	pow_current = {'tag': '6100_40263F00', 'unit': 'W'}
+	power_current = {'tag': '6100_40263F00', 'unit': 'W'}
 	power_total = {'tag': '6400_00260100', 'unit': 'W'}
 	
 	server_ip = {'tag': '6180_104A9A00'}
@@ -16,7 +16,7 @@ class Key:
 	power_b = {'tag': '6380_40451F00'}
 	voltage_ab = {'tag': '6380_40451F00'}
 	tide_ab = {'tag': '6380_40452100'}
-	power_amp_ = {'tag': '6100_40465300', 'unit': 'A'}
+	power_amp = {'tag': '6100_40465300', 'unit': 'A'}
 
 	productivity_total = {'tag': '6400_00260100'}
 	service_time = {'tag': '6400_00462E00', 'unit': 's'}
@@ -36,7 +36,6 @@ class Key:
 	wlan_dns = {'tag': '6180_104ABA00'}
 	wlan_status = {'tag': '6180_084ABC00', 'unit': 'status'}
 	wlan_scan_status = {'tag': '6180_084ABB00'}
-
 
 	device_state = {'tag': '6180_084B1E00', 'unit' : 'W'}
 	device_warning = {'tag': '6100_00411F00', 'unit': 'W'}
