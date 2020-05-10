@@ -1,2 +1,3 @@
+SMA-SunnyBoy
 requests
 Sphinx
