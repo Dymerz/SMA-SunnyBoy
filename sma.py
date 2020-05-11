@@ -92,7 +92,7 @@ class WebConnect:
 	__port = 80
 	__serial = None
 
-	def __init__(self, ip: str, user: RIGHT, password: str, port=80, use_ssl=False):
+	def __init__(self, ip: str, user: RIGHT, password: str, port=None, use_ssl=False):
 		"""Initialize a new WebConnect object
 
 		:param ip: The IP of the SMA
@@ -110,13 +110,13 @@ class WebConnect:
 		self.__user = user
 		self.__password = password
 		self.use_ssl = use_ssl
-		self.port = port
-		
+
 		self.__url = 'http://'+self.ip
 		if self.use_ssl:
 			self.__url = 'https://'+self.ip
+			self.__port = port if port else 443
 
-		self.__url+= ':'+str(port)
+		self.__url+= ':'+str(self.__port)
 
 	def auth(self):
 		"""Establish a new connexion
