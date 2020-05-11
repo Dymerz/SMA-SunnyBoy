@@ -3,19 +3,20 @@ import random
 import string
 import json
 import requests
+import warnings
 
 class RIGHT:
 	USER = 'usr'
 	INSTALLER = 'istl'
 
 class KEY:
-	# status ?: 
+	# status ?:
 	#	1725 -> offline
 	#	307  -> online
 
 	pow_current = {'tag': '6100_40263F00', 'unit': 'W'}
 	power_total = {'tag': '6400_00260100', 'unit': 'W'}
-	
+
 	server_ip = {'tag': '6180_104A9A00'}
 	server_dns = {'tag': '6180_104A9D00'}
 	server_netmask = {'tag': '6180_104A9B00'}
@@ -50,7 +51,7 @@ class KEY:
 	device_state = {'tag': '6180_084B1E00', 'unit' : 'W'}
 	device_warning = {'tag': '6100_00411F00', 'unit': 'W'}
 	device_error = {'tag': '6100_00412000', 'unit': 'W'}
-	
+
 # #######################
 # Other useful  files
 # #######################
@@ -85,14 +86,14 @@ class WebConnect:
 	cookie = None
 	lsid = None
 	ssid = None
-	
+
 	__user = None
 	__password = None
 	__url = None
 	__port = 80
 	__serial = None
 
-	def __init__(self, ip: str, user: RIGHT, password: str, port=80, use_ssl=False):
+	def __init__(self, ip: str, user: RIGHT, password: str, port=None, use_ssl=False):
 		"""Initialize a new WebConnect object
 
 		:param ip: The IP of the SMA
@@ -110,13 +111,15 @@ class WebConnect:
 		self.__user = user
 		self.__password = password
 		self.use_ssl = use_ssl
-		self.port = port
-		
+
 		self.__url = 'http://'+self.ip
 		if self.use_ssl:
 			self.__url = 'https://'+self.ip
+			self.__port = port if port else 443
+			# Ugly, but seems to be the best way to suppress these warnings
+			warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-		self.__url+= ':'+str(port)
+		self.__url+= ':'+str(self.__port)
 
 	def auth(self):
 		"""Establish a new connexion
@@ -127,13 +130,13 @@ class WebConnect:
 		self.lsid = self.__gen_sid()
 
 		params = {
-					'right': self.__user, 
+					'right': self.__user,
 					'pass': self.__password
 				}
 		headers = self.__get_header(params)
-	
+
 		try:
-			r = requests.post(self.__url + '/dyn/login.json', headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/login.json', headers=headers, json=params, verify=False)
 		except Exception:
 			return None
 
@@ -155,8 +158,8 @@ class WebConnect:
 		params = {}
 		headers = self.__get_header(params)
 
-		try: 
-			r = requests.post(self.__url + '/dyn/logout.json?sid=' + self.ssid, headers=headers, json=params)
+		try:
+			r = requests.post(self.__url + '/dyn/logout.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return False
 
@@ -180,9 +183,9 @@ class WebConnect:
 
 		params = {}
 		headers = self.__get_header(params)
-		
+
 		try:
-			r = requests.post(self.__url + '/dyn/sessionCheck.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/sessionCheck.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return None
 
@@ -208,12 +211,12 @@ class WebConnect:
 					'destDev': []
 				}
 		headers = self.__get_header(params)
-		
+
 		try:
-			r = requests.post(self.__url + '/dyn/getValues.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/getValues.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return None
-	
+
 		json_data = json.loads(r.text)
 		if 'err' in json_data:
 			return None
@@ -234,12 +237,12 @@ class WebConnect:
 
 		params = { 'destDev': [] }
 		headers = self.__get_header(params)
-		 
+
 		try:
-			r = requests.post(self.__url + '/dyn/getAllParamValues.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/getAllParamValues.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 			json_data = json.loads(r.text)
 			self.__serial = self.__serial = list(json_data['result'].keys())[0]
-			return json_data['result'][self.__serial]	
+			return json_data['result'][self.__serial]
 		except Exception:
 			return None
 
@@ -265,15 +268,15 @@ class WebConnect:
 				}
 
 		headers = self.__get_header(params)
-		
+
 		try:
-			r = requests.post(self.__url + '/dyn/getLogger.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/getLogger.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return None
-		
+
 		json_data = json.loads(r.text)
-		
-		if not 'result' in json_data: 
+
+		if not 'result' in json_data:
 			return {}
 		else:
 			self.__serial = list(json_data['result'].keys())[0]
