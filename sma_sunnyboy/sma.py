@@ -94,7 +94,7 @@ class WebConnect:
 		try:
 			r = requests.post(self.__url + '/dyn/login.json', headers=headers, json=params, verify=False)
 		except Exception:
-			return None
+			return False
 
 		json_data= json.loads(r.text)
 		if 'err' in json_data:
@@ -143,7 +143,7 @@ class WebConnect:
 		try:
 			r = requests.post(self.__url + '/dyn/sessionCheck.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
-			return None
+			return False
 
 		json_data = json.loads(r.text)
 		if not 'result' in json_data:
