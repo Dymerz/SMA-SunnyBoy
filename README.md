@@ -1,6 +1,9 @@
 # Welcome to SMA API!
 This is a simple data retrieving for **SMA SunnyBoy**.
-See [documentation](https://sma-sunnyboy.readthedocs.io/en/latest/sma_sunnyboy.html).
+
+See:
+  - [documentation](https://sma-sunnyboy.readthedocs.io/en/latest/sma_sunnyboy.html).
+  - [PyPI](https://pypi.org/project/SMA-SunnyBoy/).
 
 ## Comptability
 Tested on SunnyBoy 5.0 (1.3.17.R)
