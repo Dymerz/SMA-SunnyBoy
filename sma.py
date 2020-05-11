@@ -133,7 +133,7 @@ class WebConnect:
 		headers = self.__get_header(params)
 	
 		try:
-			r = requests.post(self.__url + '/dyn/login.json', headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/login.json', headers=headers, json=params, verify=False)
 		except Exception:
 			return None
 
@@ -156,7 +156,7 @@ class WebConnect:
 		headers = self.__get_header(params)
 
 		try: 
-			r = requests.post(self.__url + '/dyn/logout.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/logout.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return False
 
@@ -182,7 +182,7 @@ class WebConnect:
 		headers = self.__get_header(params)
 		
 		try:
-			r = requests.post(self.__url + '/dyn/sessionCheck.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/sessionCheck.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return None
 
@@ -210,7 +210,7 @@ class WebConnect:
 		headers = self.__get_header(params)
 		
 		try:
-			r = requests.post(self.__url + '/dyn/getValues.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/getValues.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return None
 	
@@ -236,7 +236,7 @@ class WebConnect:
 		headers = self.__get_header(params)
 		 
 		try:
-			r = requests.post(self.__url + '/dyn/getAllParamValues.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/getAllParamValues.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 			json_data = json.loads(r.text)
 			self.__serial = self.__serial = list(json_data['result'].keys())[0]
 			return json_data['result'][self.__serial]	
@@ -267,7 +267,7 @@ class WebConnect:
 		headers = self.__get_header(params)
 		
 		try:
-			r = requests.post(self.__url + '/dyn/getLogger.json?sid=' + self.ssid, headers=headers, json=params)
+			r = requests.post(self.__url + '/dyn/getLogger.json?sid=' + self.ssid, headers=headers, json=params, verify=False)
 		except Exception:
 			return None
 		
