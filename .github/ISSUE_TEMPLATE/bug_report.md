@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: "Report errors or unexpected behavior \U0001F41B"
-title: "[BUG]"
+title: "[BUG] Short explicit description"
 labels: bug
 assignees: ''
 
