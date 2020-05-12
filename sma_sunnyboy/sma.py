@@ -7,7 +7,7 @@ import warnings
 
 from .right import Right
 from .key import Key
-	
+
 # #######################
 # Other useful  files
 # #######################
@@ -30,6 +30,7 @@ from .key import Key
 # backupUpdate: 'input_file_backup.htm',
 # fwUpdate: 'input_file_update.htm',
 # SslCertUpdate: 'input_file_ssl.htm'
+
 
 class WebConnect:
 	"""The WebConnect object contains all methods to handle SMA features
@@ -68,14 +69,14 @@ class WebConnect:
 		self.__password = password
 		self.use_ssl = use_ssl
 
-		self.__url = 'http://'+self.ip
+		self.__url = 'http://' + self.ip
 		if self.use_ssl:
-			self.__url = 'https://'+self.ip
+			self.__url = 'https://' + self.ip
 			self.__port = port if port else 443
 			# Ugly, but seems to be the best way to suppress these warnings
 			warnings.filterwarnings('ignore', message='Unverified HTTPS request')
 
-		self.__url+= ':'+str(self.__port)
+		self.__url += ':' + str(self.__port)
 
 	def auth(self):
 		"""Establish a new connexion
@@ -86,9 +87,9 @@ class WebConnect:
 		self.lsid = self.__gen_sid()
 
 		params = {
-					'right': self.__user,
-					'pass': self.__password
-				}
+			'right': self.__user,
+			'pass': self.__password
+		}
 		headers = self.__get_header(params)
 
 		try:
@@ -96,7 +97,7 @@ class WebConnect:
 		except Exception:
 			return False
 
-		json_data= json.loads(r.text)
+		json_data = json.loads(r.text)
 		if 'err' in json_data:
 			time.sleep(5)
 			return self.auth()
@@ -146,9 +147,9 @@ class WebConnect:
 			return False
 
 		json_data = json.loads(r.text)
-		if not 'result' in json_data:
+		if 'result' not in json_data:
 			return False
-		elif not 'cntDwnGg' in json_data['result']:
+		elif 'cntDwnGg' not in json_data['result']:
 			return False
 
 		return True
@@ -163,9 +164,9 @@ class WebConnect:
 		"""
 		# TODO: Check return type
 		params = {
-					'keys':  [key['tag']],
-					'destDev': []
-				}
+			'keys': [key['tag']],
+			'destDev': []
+		}
 		headers = self.__get_header(params)
 
 		try:
@@ -179,7 +180,7 @@ class WebConnect:
 		else:
 			self.__serial = list(json_data['result'].keys())[0]
 			val = json_data['result'][self.__serial][key['tag']]['1'][0]['val']
-			if val != None:
+			if val is not None:
 				return val
 			else:
 				return 0
@@ -191,7 +192,7 @@ class WebConnect:
 		:rtype: dict
 		"""
 
-		params = { 'destDev': [] }
+		params = {'destDev': []}
 		headers = self.__get_header(params)
 
 		try:
@@ -217,11 +218,11 @@ class WebConnect:
 		key = 28672
 
 		params = {
-					'destDev': [],
-					'key': key,
-					'tEnd': end,
-					'tStart': start
-				}
+			'destDev': [],
+			'key': key,
+			'tEnd': end,
+			'tStart': start
+		}
 
 		headers = self.__get_header(params)
 
@@ -232,7 +233,7 @@ class WebConnect:
 
 		json_data = json.loads(r.text)
 
-		if not 'result' in json_data:
+		if 'result' not in json_data:
 			return {}
 		else:
 			self.__serial = list(json_data['result'].keys())[0]
@@ -259,25 +260,26 @@ class WebConnect:
 		"""
 		if self.cookie is None:
 			return {
-					'Host': self.ip,
-					'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0',
-					'Accept': 'application/json, text/plain, */*',
-					'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
-					'Accept-Encoding': 'gzip, deflate',
-					'Referer': self.__url+'/',
-					'Content-Type': 'application/json',
-					'Content-Length': str(len(params)),
-					'Cookie': 'tmhDynamicLocale.locale=%22en%22; user80=%7B%22role%22%3A%7B%22bitMask%22%3A2%2C%22title%22%3A%22usr%22%2C%22loginLevel%22%3A1%7D%2C%22username%22%3A861%2C%22sid%22%3A%22' + self.lsid + '%22%7D',
-				 }
+				'Host': self.ip,
+				'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0',
+				'Accept': 'application/json, text/plain, */*',
+				'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
+				'Accept-Encoding': 'gzip, deflate',
+				'Referer': self.__url + '/',
+				'Content-Type': 'application/json',
+				'Content-Length': str(len(params)),
+				'Cookie': f"tmhDynamicLocale.locale=%22en%22; user80=%7B%22role%22%3A%7B%22bitMask%22%3A2%2C%22title%22%3A%22usr%22%2C%22lo \
+					ginLevel%22%3A1%7D%2C%22username%22%3A861%2C%22sid%22%3A%22{self.lsid}%22%7D",
+			}
 		else:
 			return {
-					'Host': self.ip,
-					'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0',
-					'Accept': 'application/json, text/plain, */*',
-					'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
-					'Accept-Encoding': 'gzip, deflate',
-					'Referer': self.__url+'/',
-					'Content-Type': 'application/json',
-					'Content-Length': str(len(params)),
-					'Cookie': '',
-				}
+				'Host': self.ip,
+				'User-Agent': 'Mozilla/5.0 (Windows NT 6.0; WOW64; rv:24.0) Gecko/20100101 Firefox/24.0',
+				'Accept': 'application/json, text/plain, */*',
+				'Accept-Language': 'fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3',
+				'Accept-Encoding': 'gzip, deflate',
+				'Referer': self.__url + '/',
+				'Content-Type': 'application/json',
+				'Content-Length': str(len(params)),
+				'Cookie': '',
+			}
