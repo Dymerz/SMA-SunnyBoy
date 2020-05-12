@@ -1,9 +1,9 @@
-from sma_sunnyboy import *
+from sma_sunnyboy import WebConnect, Key, Right
 
 
-address = "0.0.0.0" 		# address of SMA
-password = "strongPassword" # your user password
-right = Right.USER		# the connexion level
+address = "0.0.0.0" 			# address of SMA
+password = "strongPassword"		# your user password
+right = Right.USER				# the connexion level
 
 # create object
 client = WebConnect(address, right, password)
@@ -28,6 +28,6 @@ else:
 
 	# Don't forget to disconnect from web server
 	print("[+] Disconnecting..")
-	if client.logout() == False:
+	if client.logout() is False:
 		print("[!] Error in logout!")
 	print("[+] Done.")

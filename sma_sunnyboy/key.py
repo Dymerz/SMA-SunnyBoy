@@ -1,12 +1,11 @@
 class Key:
-	# status: 
-	#	1725 -> offline
-	#	307  -> online
+	# status:
+	#   1725 -> offline
+	#   307  -> online
 
-	
 	power_current = {'tag': '6100_40263F00', 'unit': 'W'}
 	power_total = {'tag': '6400_00260100', 'unit': 'W'}
-	
+
 	server_ip = {'tag': '6180_104A9A00'}
 	server_dns = {'tag': '6180_104A9D00'}
 	server_netmask = {'tag': '6180_104A9B00'}
@@ -37,6 +36,6 @@ class Key:
 	wlan_status = {'tag': '6180_084ABC00', 'unit': 'status'}
 	wlan_scan_status = {'tag': '6180_084ABB00'}
 
-	device_state = {'tag': '6180_084B1E00', 'unit' : 'W'}
+	device_state = {'tag': '6180_084B1E00', 'unit': 'W'}
 	device_warning = {'tag': '6100_00411F00', 'unit': 'W'}
 	device_error = {'tag': '6100_00412000', 'unit': 'W'}
