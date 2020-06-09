@@ -19,7 +19,7 @@ pip install SMA-SunnyBoy
 from sma_sunnyboy import *
 client = WebConnect("192.168.0.10", Right.USER, "password")
 client.auth()
-pow_current = client.get_value(Key.pow_current)
+pow_current = client.get_value(Key.power_current)
 client.logout()
 ```
 
