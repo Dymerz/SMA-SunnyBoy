@@ -23,8 +23,8 @@ else:
 	print("[*] Production Counter: %d%s" % (power_total, Key.power_total["unit"]))
 
 	# get the current production from solar panel
-	pow_current = client.get_value(Key.pow_current)
-	print("[*] Current production: %d%s" % (pow_current, Key.pow_current["unit"]))
+	power_current = client.get_value(Key.power_current)
+	print("[*] Current production: %d%s" % (power_current, Key.power_current["unit"]))
 
 	# Don't forget to disconnect from web server
 	print("[+] Disconnecting..")
