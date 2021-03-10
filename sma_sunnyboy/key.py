@@ -18,6 +18,7 @@ class Key:
 	power_amp = {'tag': '6100_40465300', 'unit': 'A'}
 
 	productivity_total = {'tag': '6400_00260100'}
+	productivity_day = {'tag': '6400_00262200'}
 	service_time = {'tag': '6400_00462E00', 'unit': 's'}
 	injection_time = {'tag': '6400_00462F00', 'unit': 's'}
 
